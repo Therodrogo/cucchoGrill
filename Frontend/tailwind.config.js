@@ -10,6 +10,10 @@ export default {
   ],
 
   theme: {
+    colors: {
+      transparent: 'transparent',
+      fondo: '#DDBD8C',
+    },
     extend: {},
   },
   darkMode: "class",
