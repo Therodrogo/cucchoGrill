@@ -1,12 +1,11 @@
 import React from "react";
-
 import { Button, Card, CardBody } from "@nextui-org/react";
 import MenuIcon from './assets/icons/Menu.svg';
 import DescuentoIcon from "./assets/icons/Porciento.svg"
 import PerfilIcon from "./assets/icons/perfil.svg"
 import HomeIcon from "./assets/icons/home.svg"
-
 import "./icon.css"
+
 export default function App() {
     return (
         <>

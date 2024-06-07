@@ -1,15 +1,16 @@
-import React from "react";
-import SliderH from "./components/SliderH";
-import "@fortawesome/fontawesome-free/css/all.min.css"; // Importa los estilos de Font Awesome
+import React from 'react';
+import NavbarSuperior from './NavbarSuperior';
+import AdminCard from './components/AdminCard';
+import NavbarInferior from './NavbarInferior';
 
-import NavbarSuperior from "./NavbarSuperior"
-import NavbarInferior from "./NavbarInferior"
-
-
-export default function App() {
+function App() {
   return (
-    <div>
-      <SliderH/>
+    <div className="App">
+      <NavbarSuperior />
+      <AdminCard />
+      <NavbarInferior />
     </div>
   );
 }
+
+export default App;
