@@ -11,7 +11,9 @@ const app = express();
 //hola
 //Conexion DB nubr
 /* const uri = process.env.MONGODB_URI; */
-const uri = "falta token"
+
+const uri = "mongodb+srv://cucchogrill:dYBgAsmrznfRw1Bz@cluster0.b99um9w.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+
 const options = {useNewUrlParser: true};
 // Or using promises
 mongoose.connect(uri, options).then(
@@ -26,6 +28,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api', require('../routes/usuario'));
+app.use('/api', require('../routes/producto'));
+app.use('/api', require('../routes/promocion'));
+app.use('/api', require('../routes/pedido'));
+
 app.set('puerto', process.env.PORT || 3000);
 app.listen(app.get('puerto'), () => {
   console.log('Example app listening on port'+ app.get('puerto'));

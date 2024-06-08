@@ -1,127 +1,60 @@
+
 const express = require('express');
 const router = express.Router();
-const usuarioSchema = require('../models/usuario.js');
+const Usuario = require('../models/Usuario');
 
-// Agregar un usuario
-router.post('/addusuario', async (req, res) => {
-  const body = req.body;
-  const usuario = new usuarioSchema(body);
-  await usuario.save()
-    .then((result) => {
-      res.send(true)
-    })
-    .catch((err) => {
-      console.log(err)
-      res.send(false)
-    });
-}
-);
-
-//comprobacion de usuario login
-router.post('/login', async (req, res) => {
-  const body = req.body;
-  console.log(body)
-  const contrasena = body.contrasena
-  const correo = body.correo
-  const resp = await usuarioSchema.findOne({ correo, contrasena })
-    .then((result) => {
-      console.log("result")
-      console.log(result)
-      console.log(JSON.stringify(result))
-      if (JSON.stringify(result) !== "null") {
-        result.contrasena = ""
-        res.json(result)
-      } else {
-        res.send(false)
-      }
-    })
-    .catch((err) => {
-      res.json(err)
-    });
-
-});
-
-// Obtener usuario con un id
-router.get('/getusuarioid/:id', async (req, res) => {
-  const userID = req.params.id
-  console.log(req.params)
-  await usuarioSchema.findOne({
-    _id: userID
-
-  })
-    .then((result) => {
-      console.log(result)
-      res.json(result)
-    })
-    .catch((err) => {
-      console.log(err)
-      res.json(err)
-    });
-
-}
-);
-// Obtener usuario con un id
-router.get('/getnombreusuarioid/:id', async (req, res) => {
-  const userID = req.params.id
-  console.log(req.params)
-  await usuarioSchema.findOne({
-    _id: userID
-  })
-    .then((result) => {
-      const data = {
-        nombre: result.nombre
-      }
-      res.json(data)
-    })
-    .catch((err) => {
-      console.log(err)
-      res.json(err)
-    });
-
-}
-);
-
-
-// Ruta para agregar un nuevo módulo a un usuario
-router.post('/agregarmodulo/:usuarioId', async (req, res) => {
-  const { usuarioId } = req.params;
-  const { nombreModulo, participantes, tareas } = req.body;
-
+// POST: Crear un nuevo usuario
+router.post('/nuevousuario', async (req, res) => {
   try {
-    const usuario = await usuario.findById(usuarioId);
-    if (!usuario) {
-      return res.status(404).json({ mensaje: 'Usuario no encontrado' });
-    }
-    const nuevoModulo = new Modulo({
-      nombre: nombreModulo,
-      participantes,
-      tareas,
-    });
-
-
-    await nuevoModulo.save();
-
-    usuario.modulo.push(nuevoModulo._id);
+    const usuario = new Usuario(req.body);
     await usuario.save();
-
-    res.status(201).json({ mensaje: 'Módulo agregado con éxito' });
+    res.status(201).send(usuario);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ mensaje: 'Error interno del servidor' });
+    res.status(400).send(error);
   }
 });
 
+// GET: Obtener todos los usuarios
+router.get('/obtenerusuarios', async (req, res) => {
+  try {
+    const usuarios = await Usuario.find({});
+    res.status(200).send(usuarios);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 
-router.get('/getallusuarios', async (req, res) => {
-  const usuarios = await usuarioSchema.find()
-    .then((result) => {
-      res.json(result)
-    })
-    .catch((err) => {
-      console.log(err)
-      res.json(err)
-    });
-
+// PUT: Actualizar un usuario por ID
+router.put('/actualizarusuario:id', async (req, res) => {
+  try {
+    const usuario = await Usuario.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+    if (!usuario) {
+      return res.status(404).send();
+    }
+    res.send(usuario);
+  } catch (error) {
+    res.status(400).send(error);
+  }
 });
 
 module.exports = router;
+
+//comprobacion de usuario login
+router.post('/login', async (req, res) => {
+  try {
+    const { nombre, contraseña } = req.body;
+    const usuario = await Usuario.findOne({ nombre });
+    if (!usuario) {
+      return res.status(404).send({ error: 'Usuario no encontrado' });
+    }
+
+    const esContraseñaValida = await usuario.compararContraseña(contraseña);
+    if (!esContraseñaValida) {
+      return res.status(400).send({ error: 'Contraseña incorrecta' });
+    }
+
+    res.send({ message: 'Login exitoso', usuario });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
