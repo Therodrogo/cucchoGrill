@@ -2,6 +2,7 @@ import React from 'react';
 import NavbarSuperior from './NavbarSuperior';
 import AdminCard from './components/AdminCard';
 import IniciarSesion from "./components/IniciarSesion"
+import QRscan from "./components/QRscan"
 import NavbarInferior from './NavbarInferior';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -13,6 +14,10 @@ function App() {
       {value ==="perfil" &&
         <IniciarSesion/>
       }
+      {value==="QR"&&
+        <QRscan/>
+      }
+
       {/*  <AdminCard /> */}
       <NavbarInferior />
     </div>
