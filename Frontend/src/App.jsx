@@ -1,13 +1,19 @@
 import React from 'react';
 import NavbarSuperior from './NavbarSuperior';
 import AdminCard from './components/AdminCard';
+import IniciarSesion from "./components/IniciarSesion"
 import NavbarInferior from './NavbarInferior';
+import { useSelector, useDispatch } from 'react-redux';
 
 function App() {
+  const value = useSelector((state) => state.example.value);
   return (
     <div className="App">
       <NavbarSuperior />
-      <AdminCard />
+      {value ==="perfil" &&
+        <IniciarSesion/>
+      }
+      {/*  <AdminCard /> */}
       <NavbarInferior />
     </div>
   );
