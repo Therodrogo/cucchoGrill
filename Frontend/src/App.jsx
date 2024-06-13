@@ -5,6 +5,8 @@ import IniciarSesion from "./components/IniciarSesion"
 import QRscan from "./components/QRscan"
 import NavbarInferior from './NavbarInferior';
 import { useSelector, useDispatch } from 'react-redux';
+import SliderH from './components/SliderH';
+import CardProductos from './components/CardProductos';
 
 function App() {
   const value = useSelector((state) => state.example.value);
@@ -17,7 +19,10 @@ function App() {
       {value==="QR"&&
         <QRscan/>
       }
-
+      {value ==="menu" &&
+        <SliderH/>  &&
+        <CardProductos/>
+      }
       {/*  <AdminCard /> */}
       <NavbarInferior />
     </div>
