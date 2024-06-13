@@ -11,8 +11,8 @@ export default {
 
   theme: {
     colors: {
-      transparent: 'transparent',
       fondo: '#DDBD8C',
+      primario:"#1F1120"
     },
     extend: {},
   },

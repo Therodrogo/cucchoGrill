@@ -1,16 +1,20 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
 
-const usuarioSchema = new Schema({
-    nombre: String,
-    esProfe: Boolean,
-    correo: { type: String, unique: true },
-    contrasena: String,
-    imagenperfil: String,
-    modulo: [{ type: Schema.Types.ObjectId, ref: 'modulo' }],
-    planilla: [{ type: Schema.Types.ObjectId, ref: 'planilla' }],
-}, { versionKey: false }
-);
+const UsuarioSchema = new Schema({
+  nombre: { type: String, required: true },
+  contraseña: { type: String, required: true },
+  rol: { type: String, required: true }
+});
 
-const usuario = mongoose.model('usuario', usuarioSchema);
-module.exports = usuario;
+UsuarioSchema.pre('save', async function (next) {
+    const usuario = this;
+    if (usuario.isModified('contraseña')) {
+      usuario.contraseña = await bcrypt.hash(usuario.contraseña, 8);
+    }
+    next();
+  });
+
+const Usuario = mongoose.model('Usuario', UsuarioSchema);
+module.exports = Usuario;

@@ -1,10 +1,12 @@
 .menu-icon {
     filter: invert(1);
-    height: 30px;
+    height: 25px;
     /* Invierte el color del ícono */
     /* padding-bottom: 5px; */
 }
 
-.menu-icon p{
-    margin: 5px;
+.menu-icon-active{
+    height: 25px;
+    width: 25px;
+
 }
