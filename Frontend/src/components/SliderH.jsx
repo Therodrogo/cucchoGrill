@@ -37,7 +37,7 @@ const SliderH = () => {
   return (
     <div className="overflow-x-scroll flex space-x-4 p-4">
       {products.map((product, index) => (
-        <div key={index} className="flex-shrink-0 w-64 p-4 border rounded-lg shadow-lg bg-white">
+        <div key={index} className="flex-shrink-0 w-64 p-4 rounded-lg shadow-lg bg-white">
           <img src={product.imageUrl} alt={product.name} className="w-full h-40 object-cover rounded-t-lg" />
           <div className="p-2">
             <h3 className="font-bold text-lg">{product.name}</h3>

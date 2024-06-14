@@ -11,37 +11,39 @@ import CardProductos from './components/CardProductos';
 function App() {
   const value = useSelector((state) => state.example.value);
   return (
-    <div className="App">
+    <div className="App" style={{ display: "flex", flexDirection: "column" }}>
+
       <NavbarSuperior />
-      {value ==="perfil" &&
-        <IniciarSesion/>
-      }
-      {value==="QR"&&
-        <QRscan/>
-      }
-      {value ==="menu" &&
-        <SliderH/>  &&
-        <CardProductos/>
-      }
-      {/*  <AdminCard /> */}
+
+      <div className='contenidoCentral' style={{ display: "flex", flexDirection: "column", overflow: "auto", height: "81vh", marginTop: "70px" }} >
+
+        {value === "home" &&
+          <>
+          
+          </>
+        }
+
+        {value === "perfil" &&
+          <IniciarSesion />
+        }
+        {value === "QR" &&
+          <QRscan />
+        }
+        {value === "menu" &&
+          <div >
+            <CardProductos />
+          </div>
+        }
+        {value === "descuento" &&
+          <SliderH />
+        }
+
+      </div>
+
       <NavbarInferior />
+
     </div>
   );
 }
-/*
-const App = () => {
-    return (
-        <Router>
-            <Switch>
-                <Route path="/admin-card" component={AdminCardPage} />
-                <Route path="/admin-product" component={AdminProductPage} />
-                <Route path="/pay-confirm" component={PayConfirmPage} />
-                <Route path="/slider-h" component={SliderHPage} />
-                <Route exact path="/" component={AdminCardPage} /> {}
-            </Switch>
-        </Router>
-    );
-};
-*/
 
 export default App;
