@@ -7,6 +7,9 @@ import NavbarInferior from './NavbarInferior';
 import { useSelector, useDispatch } from 'react-redux';
 import SliderH from './components/SliderH';
 import CardProductos from './components/CardProductos';
+import Carrousel from './components/Carrousel';
+import Novedades from './components/Novedades';
+import DescuentosCard from './components/DescuentosCard';
 
 function App() {
   const value = useSelector((state) => state.example.value);
@@ -19,7 +22,8 @@ function App() {
 
         {value === "home" &&
           <>
-          
+          <Carrousel />
+          <Novedades />
           </>
         }
 
@@ -35,7 +39,10 @@ function App() {
           </div>
         }
         {value === "descuento" &&
+          <>
           <SliderH />
+          <DescuentosCard />
+          </>
         }
 
       </div>

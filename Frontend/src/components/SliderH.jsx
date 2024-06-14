@@ -1,39 +1,52 @@
-import React from 'react';
+import React from "react";
 
-const products = [
+const allProducts = [
   {
-    name: "Nombre producto 1",
-    description: "Descripción del producto o promo",
-    price: "$10.00",
-    imageUrl: "https://via.placeholder.com/150?text=Producto+1"
+    name: "Paella",
+    description: "Arroz, mariscos, azafrán",
+    price: "$15.000",
+    imageUrl: "https://ibb.co/hWgjNQG",
   },
   {
-    name: "Nombre producto 2",
-    description: "Descripción del producto o promo",
-    price: "$20.00",
-    imageUrl: "https://via.placeholder.com/150?text=Producto+2"
+    name: "Enchiladas",
+    description: "Tortillas, pollo, salsa roja",
+    price: "$11.900",
+    imageUrl: "https://ibb.co/W649Xr1",
   },
   {
-    name: "Nombre producto 3",
-    description: "Descripción del producto o promo",
-    price: "$30.00",
-    imageUrl: "https://via.placeholder.com/150?text=Producto+3"
+    name: "Cheeseburger",
+    description: "Carne, queso, lechuga, tomate",
+    price: "$8.000",
+    imageUrl: "https://ibb.co/gwdGFbP",
   },
   {
-    name: "Nombre producto 4",
-    description: "Descripción del producto o promo",
-    price: "$40.00",
-    imageUrl: "https://via.placeholder.com/150?text=Producto+4"
+    name: "Bacon Burger",
+    description: "Carne, tocino, queso, cebolla",
+    price: "$9.500",
+    imageUrl: "https://ibb.co/RNQKcxB",
   },
   {
-    name: "Nombre producto 5",
-    description: "Descripción del producto o promo",
-    price: "$50.00",
-    imageUrl: "https://via.placeholder.com/150?text=Producto+5"
+    name: "PROCCIUTO RUCOLA",
+    description: "Salsa de Pizza, Queso Mozzarella, Procciuto Crudo, Tomate Cherry, Rucula",
+    price: "$12.500",
+    imageUrl: "https://fudo-apps-storage.s3.sa-east-1.amazonaws.com/production/150061/common/products/8",
+  },
+  {
+    name: "CARBONARA",
+    description: "Salsa Bianche, Queso Mozzarella, Cebolla Morada, Champiñón y Tocino",
+    price: "$10.500",
+    imageUrl: "https://fudo-apps-storage.s3.sa-east-1.amazonaws.com/production/150061/common/products/23",
   }
 ];
 
+const getRandomProducts = (num) => {
+  const shuffled = allProducts.sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, num);
+};
+
 const SliderH = () => {
+  const products = getRandomProducts(4);
+
   return (
     <div className="overflow-x-scroll flex space-x-4 p-4">
       {products.map((product, index) => (
@@ -51,3 +64,4 @@ const SliderH = () => {
 };
 
 export default SliderH;
+
