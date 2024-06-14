@@ -3,46 +3,18 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 
 const discounts = [
   {
-    title: "Paella",
-    description: "Arroz, mariscos, azafrán",
-    img: "https://ibb.co/hWgjNQG",
-    originalPrice: "$15.000",
-    discountPrice: "$12.000",
-  },
-  {
-    title: "Enchiladas",
-    description: "Tortillas, pollo, salsa roja",
-    img: "https://ibb.co/W649Xr1",
-    originalPrice: "$11.900",
-    discountPrice: "$9.500",
-  },
-  {
-    title: "Cheeseburger",
+    title: "Rodeo",
     description: "Carne, queso, lechuga, tomate",
-    img: "https://ibb.co/gwdGFbP",
-    originalPrice: "$8.000",
-    discountPrice: "$6.500",
+    img: "https://i.ibb.co/xGYy8Kf/hamburguesa1.jpg",
+    originalPrice: "$10.000",
+    discountPrice: "$8.000",
   },
   {
-    title: "Bacon Burger",
-    description: "Carne, tocino, queso, cebolla",
-    img: "https://ibb.co/RNQKcxB",
-    originalPrice: "$9.500",
-    discountPrice: "$7.500",
-  },
-  {
-    title: "PROCCIUTO RUCOLA",
-    description: "Salsa de Pizza, Queso Mozzarella, Procciuto Crudo, Tomate Cherry, Rucula",
-    img: "https://fudo-apps-storage.s3.sa-east-1.amazonaws.com/production/150061/common/products/8",
-    originalPrice: "$12.500",
-    discountPrice: "$10.000",
-  },
-  {
-    title: "CARBONARA",
-    description: "Salsa Bianche, Queso Mozzarella, Cebolla Morada, Champiñón y Tocino",
-    img: "https://fudo-apps-storage.s3.sa-east-1.amazonaws.com/production/150061/common/products/23",
-    originalPrice: "$10.500",
-    discountPrice: "$8.500",
+    title: "Cheese Burger",
+    description: "Carne, Pepinillos, queso, cebolla",
+    img: "https://i.ibb.co/5ks3LNn/hamburguesa2.jpg",
+    originalPrice: "$12.000",
+    discountPrice: "$9.500",
   },
 ];
 

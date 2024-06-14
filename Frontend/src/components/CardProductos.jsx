@@ -8,13 +8,13 @@ const sections = [
       {
         title: "Paella",
         description: "Arroz, mariscos, azafrán",
-        img: "https://ibb.co/hWgjNQG",
+        img: "https://i.ibb.co/XsWgP0n/paella.jpg",
         price: "$15.000",
       },
       {
         title: "Enchiladas",
         description: "Tortillas, pollo, salsa roja",
-        img: "https://ibb.co/W649Xr1",
+        img: "https://i.ibb.co/t4Tf605/enchiladas.jpg",
         price: "$11.900",
       },
     ],
@@ -23,15 +23,15 @@ const sections = [
     title: "Hamburguesas",
     items: [
       {
-        title: "Cheeseburger",
+        title: "Rodeo",
         description: "Carne, queso, lechuga, tomate",
-        img: "https://ibb.co/gwdGFbP",
+        img: "https://i.ibb.co/xGYy8Kf/hamburguesa1.jpg",
         price: "$8.000",
       },
       {
-        title: "Bacon Burger",
-        description: "Carne, tocino, queso, cebolla",
-        img: "https://ibb.co/RNQKcxB",
+        title: "Cheese Burger",
+        description: "Carne, Pepinillos , queso, cebolla",
+        img: "https://i.ibb.co/5ks3LNn/hamburguesa2.jpg",
         price: "$9.500",
       },
     ],

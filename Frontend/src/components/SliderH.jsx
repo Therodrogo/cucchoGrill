@@ -4,26 +4,14 @@ const allProducts = [
   {
     name: "Paella",
     description: "Arroz, mariscos, azafrán",
+    imageUrl: "https://i.ibb.co/XsWgP0n/paella.jpg",
     price: "$15.000",
-    imageUrl: "https://ibb.co/hWgjNQG",
   },
   {
     name: "Enchiladas",
     description: "Tortillas, pollo, salsa roja",
+    imageUrl: "https://i.ibb.co/t4Tf605/enchiladas.jpg",
     price: "$11.900",
-    imageUrl: "https://ibb.co/W649Xr1",
-  },
-  {
-    name: "Cheeseburger",
-    description: "Carne, queso, lechuga, tomate",
-    price: "$8.000",
-    imageUrl: "https://ibb.co/gwdGFbP",
-  },
-  {
-    name: "Bacon Burger",
-    description: "Carne, tocino, queso, cebolla",
-    price: "$9.500",
-    imageUrl: "https://ibb.co/RNQKcxB",
   },
   {
     name: "PROCCIUTO RUCOLA",
@@ -38,7 +26,6 @@ const allProducts = [
     imageUrl: "https://fudo-apps-storage.s3.sa-east-1.amazonaws.com/production/150061/common/products/23",
   }
 ];
-
 const getRandomProducts = (num) => {
   const shuffled = allProducts.sort(() => 0.5 - Math.random());
   return shuffled.slice(0, num);
@@ -62,6 +49,4 @@ const SliderH = () => {
     </div>
   );
 };
-
 export default SliderH;
-

@@ -3,30 +3,6 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 
 const novedades = [
   {
-    title: "Paella",
-    description: "Arroz, mariscos, azafrán",
-    img: "https://ibb.co/hWgjNQG",
-    price: "$15.000",
-  },
-  {
-    title: "Enchiladas",
-    description: "Tortillas, pollo, salsa roja",
-    img: "https://ibb.co/W649Xr1",
-    price: "$11.900",
-  },
-  {
-    title: "Cheeseburger",
-    description: "Carne, queso, lechuga, tomate",
-    img: "https://ibb.co/gwdGFbP",
-    price: "$8.000",
-  },
-  {
-    title: "Bacon Burger",
-    description: "Carne, tocino, queso, cebolla",
-    img: "https://ibb.co/RNQKcxB",
-    price: "$9.500",
-  },
-  {
     title: "PROCCIUTO RUCOLA",
     description: "Salsa de Pizza, Queso Mozzarella, Procciuto Crudo, Tomate Cherry, Rucula",
     img: "https://fudo-apps-storage.s3.sa-east-1.amazonaws.com/production/150061/common/products/8",
