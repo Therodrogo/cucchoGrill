@@ -42,19 +42,23 @@ module.exports = router;
 //comprobacion de usuario login
 router.post('/login', async (req, res) => {
   try {
-    const { nombre, contraseña } = req.body;
+    const { nombre, contrasena } = req.body;
     const usuario = await Usuario.findOne({ nombre });
     if (!usuario) {
-      return res.status(404).send({ error: 'Usuario no encontrado' });
+      return res.status(404).send(false);
     }
 
-    const esContraseñaValida = await usuario.compararContraseña(contraseña);
-    if (!esContraseñaValida) {
-      return res.status(400).send({ error: 'Contraseña incorrecta' });
+    const esContrasenaValida = await usuario.compararContrasena(contrasena);
+    if (!esContrasenaValida) {
+      return res.status(400).send(false);
     }
 
-    res.send({ message: 'Login exitoso', usuario });
+    const userValidado = {
+      nombre: usuario.nombre,
+      rol: usuario.rol
+    }
+    res.send({ message: 'Login exitoso', userValidado });
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).send(null);
   }
 });

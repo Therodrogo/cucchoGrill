@@ -1,9 +1,61 @@
 import React from 'react';
+import { useState } from 'react';
 import { Input, Button, Card, CardBody } from '@nextui-org/react';
 
+import db from '../services/db';
+import Swal from 'sweetalert2'
+
 export default function APP() {
+
+    const [person, setPerson] = useState({
+        nombre: '',
+        contrasena: ''
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setPerson({
+            ...person,
+            [name]: value
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const resp = await db.login(person)
+
+        if (resp) {
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Exito!",
+                showConfirmButton: false,
+                timer: 1500,
+                customClass: {
+                    popup: 'swal2-popup',
+                    title: 'swal2-title',
+                }
+            });
+        }
+        else {
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "Credenciales incorrectas",
+                showConfirmButton: false,
+                timer: 1500,
+                customClass: {
+                    popup: 'swal2-popup',
+                    title: 'swal2-title',
+                }
+            });
+        }
+    };
+
     return (
         <div style={{ marginTop: "10%", padding: "10px" }}>
+
             <Card >
                 <CardBody>
                     <div >
@@ -29,8 +81,12 @@ export default function APP() {
                                 <Input
                                     type="user"
                                     label="Usuario"
+                                    id="nombre"
+                                    name='nombre'
                                     placeholder="Ingresa tu usuario"
                                     labelPlacement="outside"
+                                    value={person.usuario}
+                                    onChange={handleChange}
                                     startContent={
                                         <span className="material-icons-outlined" style={{ color: "#454545", paddingRight: "10px" }}>
                                             account_circle
@@ -45,6 +101,10 @@ export default function APP() {
                                     label="Contraseña"
                                     placeholder="Ingresa tu contraseña"
                                     labelPlacement="outside"
+                                    id='contrasena'
+                                    name='contrasena'
+                                    value={person.contrasena}
+                                    onChange={handleChange}
                                     startContent={
                                         <span className="material-icons-outlined" style={{ color: "#454545", paddingRight: "10px" }}>
                                             lock
@@ -54,7 +114,9 @@ export default function APP() {
                                 />
                             </div>
                             <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
-                                <Button className='bg-primario' style={{ color: "white" }}>
+                                <Button
+                                    onClick={handleSubmit}
+                                    className='bg-primario' style={{ color: "white" }}>
                                     Iniciar Sesión
                                 </Button>
                             </div>
