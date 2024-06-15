@@ -2,7 +2,7 @@ import React from 'react';
 import NavbarSuperior from './NavbarSuperior';
 import AdminCard from './components/AdminCard';
 import IniciarSesion from "./components/IniciarSesion"
-import QRscan from "./components/QRscan"
+import QRscan2 from "./components/QRScan2"
 import NavbarInferior from './NavbarInferior';
 import { useSelector, useDispatch } from 'react-redux';
 import SliderH from './components/SliderH';
@@ -31,7 +31,7 @@ function App() {
           <IniciarSesion />
         }
         {value === "QR" &&
-          <QRscan />
+          <QRscan2 />
         }
         {value === "menu" &&
           <div >
