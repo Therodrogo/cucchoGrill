@@ -3,5 +3,24 @@
 @tailwind utilities;
 
 body {
-    font-family: 'Roboto', sans-serif;
-  }
+  font-family: 'Roboto', sans-serif;
+}
+
+.swal2-popup {
+  background-color: #1F1120;
+  /* Cambiar el color de fondo */
+}
+
+.swal2-title {
+  color: #ffffff;
+  /* Cambiar el color del título */
+}
+.swal2-text {
+  color: #ffffff;
+  /* Cambiar el color del título */
+}
+
+.swal2-content {
+  color: #ffffff;
+  /* Cambiar el color del contenido */
+}
