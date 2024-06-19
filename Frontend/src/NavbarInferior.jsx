@@ -13,13 +13,15 @@ import "./icon.css"
 
 import { useSelector, useDispatch } from 'react-redux';
 import { updateString } from "./app/slides/example";
-
+import { updateLogin } from "./app/slides/example2";
 
 
 export default function App() {
 
 
     const value = useSelector((state) => state.example.value);
+
+    const login = useSelector((state) => state.example2.value);
 
     const dispatch = useDispatch();
 
@@ -87,20 +89,53 @@ export default function App() {
                     </div>
                 )}
 
-                {value === "perfil" ? (
-                    <div onClick={() => handleUpdate("perfil")} style={{ display: "flex", alignContent: "center", justifyContent: "center", color: "white", height: "50px", width: "64px" }} >
-                        <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems:"center" }}>
-                            <img className="menu-icon-active" src={PerfilIconActive} alt="" />
-                            <p style={{ paddingTop: "5px", fontSize: "0.8em", textAlign: "center",color: "#DDBD8C"  }}>Perfil</p>
-                        </div>
-                    </div>
+
+
+
+                {login === "login" ? (
+                    <>
+                        {value === "login" ? (
+                            <div onClick={() => handleUpdate("login")} style={{ display: "flex", alignContent: "center", justifyContent: "center", color: "white", height: "50px", width: "64px" }} >
+                                <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+                                    {/*  <img className="menu-icon-active" src={PerfilIconActive} alt="" /> */}
+                                    <span className="material-icons-outlined" style={{color:"#DDBD8C"}}>
+                                        badge
+                                    </span>
+                                    <p style={{ paddingTop: "5px", fontSize: "0.8em", textAlign: "center", color: "#DDBD8C" }}>Mi Perfil</p>
+                                </div>
+                            </div>
+                        ) : (
+                            <div onClick={() => handleUpdate("login")} style={{ display: "flex", alignContent: "center", justifyContent: "center", color: "white", height: "50px", width: "64px" }} >
+                                <div style={{  display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+                                    {/* <img className="menu-icon" src={PerfilIcon} alt="" /> */}
+                                    <span className="material-icons-outlined">
+                                        badge
+                                    </span>
+                                    <p style={{ paddingTop: "5px", fontSize: "0.8em", textAlign: "center" }}>Mi Perfil</p>
+                                </div>
+                            </div>
+                        )}
+                    </>
                 ) : (
-                    <div onClick={() => handleUpdate("perfil")} style={{ display: "flex", alignContent: "center", justifyContent: "center", color: "white", height: "50px", width: "64px" }} >
-                        <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
-                            <img className="menu-icon" src={PerfilIcon} alt="" />
-                            <p style={{ paddingTop: "5px", fontSize: "0.8em", textAlign: "center" }}>Perfil</p>
-                        </div>
-                    </div>
+                    <>
+
+                        {value === "perfil" ? (
+                            <div onClick={() => handleUpdate("perfil")} style={{ display: "flex", alignContent: "center", justifyContent: "center", color: "white", height: "50px", width: "64px" }} >
+                                <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+                                    <img className="menu-icon-active" src={PerfilIconActive} alt="" />
+                                    <p style={{ paddingTop: "5px", fontSize: "0.8em", textAlign: "center", color: "#DDBD8C" }}>Perfil</p>
+                                </div>
+                            </div>
+                        ) : (
+                            <div onClick={() => handleUpdate("perfil")} style={{ display: "flex", alignContent: "center", justifyContent: "center", color: "white", height: "50px", width: "64px" }} >
+                                <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
+                                    <img className="menu-icon" src={PerfilIcon} alt="" />
+                                    <p style={{ paddingTop: "5px", fontSize: "0.8em", textAlign: "center" }}>Perfil</p>
+                                </div>
+                            </div>
+                        )}
+
+                    </>
                 )}
 
 

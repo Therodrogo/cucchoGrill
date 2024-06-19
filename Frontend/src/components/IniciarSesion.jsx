@@ -5,7 +5,24 @@ import { Input, Button, Card, CardBody } from '@nextui-org/react';
 import db from '../services/db';
 import Swal from 'sweetalert2'
 
+import { useSelector, useDispatch } from 'react-redux';
+import { updateString } from "../app/slides/example"
+import { updateLogin } from "../app/slides/example2"
+
 export default function APP() {
+
+
+    const value = useSelector((state) => state.example.value);
+    const login = useSelector((state) => state.example2.value);
+
+    const dispatch = useDispatch();
+
+    const handleUpdate = (valor) => {
+        dispatch(updateString(valor));
+    };
+    const handleUpdateLogin = (valor) => {
+        dispatch(updateLogin(valor));
+    };
 
     const [person, setPerson] = useState({
         nombre: '',
@@ -26,6 +43,9 @@ export default function APP() {
         const resp = await db.login(person)
 
         if (resp) {
+
+            handleUpdateLogin("login")
+            handleUpdate("login")
             Swal.fire({
                 position: "center",
                 icon: "success",

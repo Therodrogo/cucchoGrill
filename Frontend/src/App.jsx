@@ -44,6 +44,11 @@ function App() {
           <DescuentosCard />
           </>
         }
+        {value === "login" &&
+          <>
+          <AdminCard/>
+          </>
+        }
 
       </div>
 
