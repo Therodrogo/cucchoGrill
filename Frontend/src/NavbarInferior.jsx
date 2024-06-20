@@ -108,10 +108,10 @@ export default function App() {
                             <div onClick={() => handleUpdate("login")} style={{ display: "flex", alignContent: "center", justifyContent: "center", color: "white", height: "50px", width: "64px" }} >
                                 <div style={{  display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
                                     {/* <img className="menu-icon" src={PerfilIcon} alt="" /> */}
-                                    <span className="material-icons-outlined">
+                                    <span className="material-icons-outlined" style={{color:"#5da4ed"}}>
                                         badge
                                     </span>
-                                    <p style={{ paddingTop: "5px", fontSize: "0.8em", textAlign: "center" }}>Mi Perfil</p>
+                                    <p style={{ paddingTop: "5px", fontSize: "0.8em", textAlign: "center", color:"#5da4ed" }}>Mi Perfil</p>
                                 </div>
                             </div>
                         )}
