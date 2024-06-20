@@ -11,6 +11,8 @@ import Carrousel from './components/Carrousel';
 import Novedades from './components/Novedades';
 import DescuentosCard from './components/DescuentosCard';
 
+import VistaPedido from "./components/VistaPedido"
+
 function App() {
   const value = useSelector((state) => state.example.value);
   return (
@@ -47,6 +49,11 @@ function App() {
         {value === "login" &&
           <>
           <AdminCard/>
+          </>
+        }
+         {value === "pedido" &&
+          <>
+          <VistaPedido/>
           </>
         }
 

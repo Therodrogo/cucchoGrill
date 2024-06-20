@@ -3,12 +3,22 @@ import Swal from 'sweetalert2';
 import QrScanner from 'qr-scanner';
 import { Button, Card, CardBody } from '@nextui-org/react';
 
+import { updateString } from '../app/slides/example';
+
+import { useDispatch } from 'react-redux';
+
 const QRCodeScanner = () => {
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
     const [scanner, setScanner] = useState(null);
+    const dispatch = useDispatch()
+
 
     const [orden, setOrden] = useState("")
+
+    const handleUpdate = (valor) => {
+        dispatch(updateString(valor));
+    };
 
     useEffect(() => {
         if (scanner) {
@@ -51,6 +61,7 @@ const QRCodeScanner = () => {
                         }
                     });
                     setScanner(null)
+                    handleUpdate("pedido")
 
 
                 } else {
@@ -67,7 +78,7 @@ const QRCodeScanner = () => {
                     });
                 }
 
-              
+
 
             },
             error => {
@@ -85,8 +96,8 @@ const QRCodeScanner = () => {
     };
 
     return (
-        <div>
-            <h5 className="text-center">Escanear código QR</h5>
+        <div style={{width:"100%" ,height:"100%",background:"#1F1120"}}>
+            <h5 style={{color:"white"}} className="text-center text-white">Escanear código QR</h5>
             <Card style={{ marginLeft: "20px", marginRight: "20px" }}>
                 <CardBody>
                     <video style={{ borderRadius: "12px" }} ref={videoRef}></video>

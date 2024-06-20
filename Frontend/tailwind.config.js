@@ -12,7 +12,8 @@ export default {
   theme: {
     colors: {
       fondo: '#DDBD8C',
-      primario:"#1F1120"
+      primario:"#1F1120",
+      primary:"#1F1120"
     },
     extend: {},
   },
