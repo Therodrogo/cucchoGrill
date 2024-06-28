@@ -56,7 +56,11 @@ const QRCodeScanner = () => {
             }
         });
     };
+    const [message, setMessage] = useState("Esperando...");
 
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
     const requestBrowserCameraPermission = async () => {
         try {
             document.addEventListener("deviceready", onDeviceReady, false);
@@ -78,17 +82,53 @@ const QRCodeScanner = () => {
     const encenderCamara = () => {
         const qrScanner = new QrScanner(
             videoRef.current,
-            result => {
+            async result => {
                 Swal.fire('QR Code', `Contenido: ${result}`, 'success');
                 const match = result.match(/^(\D+)\s(\d+)\s(.+)$/);
+
                 if (match) {
                     const primeraParte = match[1].trim();
-                    const numero = match[2];
+                    const numero = Number(match[2]);
                     const segundaParte = match[3];
+                    console.log(numero)
+                    if (primeraParte === "Mesa" && segundaParte == "CucchoGrill" && numero > 0 && numero < 5) {
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: "Escaneado con éxito",
+                            showConfirmButton: false,
+                            timer: 1500,
+                            customClass: {
+                                popup: 'swal2-popup',
+                                title: 'swal2-title',
+                            }
+                        });
+                        setScanner(null);
+                        handleUpdate("pedido");
+                    }
+                    else {
+                        Swal.fire({
+                            position: "center",
+                            icon: "error",
+                            title: "QR incorrecto222",
+                            showConfirmButton: false,
+                            timer: 1500,
+                            customClass: {
+                                popup: 'swal2-popup',
+                                title: 'swal2-title',
+                            }
+                        });
+                        setScanner(null);
+                        await sleep(1500);
+                        setMessage("Han pasado 0.5 segundos");
+                        setScanner(qrScanner);
+                    }
+                }
+                else {
                     Swal.fire({
                         position: "center",
-                        icon: "success",
-                        title: "Escaneado con éxito",
+                        icon: "error",
+                        title: "QR incorrecto3333",
                         showConfirmButton: false,
                         timer: 1500,
                         customClass: {
@@ -97,20 +137,11 @@ const QRCodeScanner = () => {
                         }
                     });
                     setScanner(null);
-                    handleUpdate("pedido");
-                } else {
-                    Swal.fire({
-                        position: "center",
-                        icon: "error",
-                        title: "QR incorrecto",
-                        showConfirmButton: false,
-                        timer: 1500,
-                        customClass: {
-                            popup: 'swal2-popup',
-                            title: 'swal2-title',
-                        }
-                    });
+                    await sleep(1500);
+                    setMessage("Han pasado 0.5 segundos");
+                    setScanner(qrScanner);
                 }
+
             },
             error => {
                 console.error(error);
