@@ -11,16 +11,26 @@ const app = express();
 //hola
 //Conexion DB nubr
 /* const uri = process.env.MONGODB_URI; */
+const mongoose = require('mongoose');
 
-const uri = "mongodb+srv://cucchogrill:dYBgAsmrznfRw1Bz@cluster0.b99um9w.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+const uri = "mongodb+srv://cucchogrill:dYBgAsmrznfRw1Bz@cluster0.b99um9w.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
-const options = {useNewUrlParser: true};
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        console.log('Conectado a MongoDB');
+    })
+    .catch((err) => {
+        console.error('Error al conectar a MongoDB', err);
+    });
+
+
+/* const options = {useNewUrlParser: true};
 // Or using promises
 mongoose.connect(uri, options).then(
   () => { console.log('Conectado a DB') },
   err => { console.log(err) }
 );
-
+ */
 // Middleware
 app.use(morgan('tiny'));
 app.use(cors());
