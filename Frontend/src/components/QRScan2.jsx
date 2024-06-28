@@ -2,19 +2,13 @@ import React, { useRef, useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import QrScanner from 'qr-scanner';
 import { Button, Card, CardBody } from '@nextui-org/react';
-
 import { updateString } from '../app/slides/example';
-
 import { useDispatch } from 'react-redux';
 
 const QRCodeScanner = () => {
     const videoRef = useRef(null);
-    const canvasRef = useRef(null);
     const [scanner, setScanner] = useState(null);
-    const dispatch = useDispatch()
-
-
-    const [orden, setOrden] = useState("")
+    const dispatch = useDispatch();
 
     const handleUpdate = (valor) => {
         dispatch(updateString(valor));
@@ -31,28 +25,70 @@ const QRCodeScanner = () => {
         };
     }, [scanner]);
 
-
     useEffect(() => {
-        encenderCamara()
-    }, [])
+        if (window.cordova && window.cordova.plugins && window.cordova.plugins.permissions) {
+            requestCameraPermission();
+        } else {
+            // Si no estamos en un entorno Cordova, solicitamos permisos de navegador
+            requestBrowserCameraPermission();
+        }
+    }, []);
 
+    const requestCameraPermission = () => {
+        const permissions = window.cordova.plugins.permissions;
+        permissions.checkPermission(permissions.CAMERA, (status) => {
+            if (!status.hasPermission) {
+                permissions.requestPermission(permissions.CAMERA, (status) => {
+                    if (status.hasPermission) {
+                        encenderCamara();
+                    } else {
+                        Swal.fire({
+                            position: "center",
+                            icon: "error",
+                            title: "Permiso de cámara denegado",
+                            text: "Por favor, concede el permiso de la cámara para escanear el código QR.",
+                            showConfirmButton: true,
+                        });
+                    }
+                });
+            } else {
+                encenderCamara();
+            }
+        });
+    };
+
+    const requestBrowserCameraPermission = async () => {
+        try {
+            document.addEventListener("deviceready", onDeviceReady, false);
+            function onDeviceReady() {
+                console.log(navigator.camera);
+            }
+            encenderCamara();
+        } catch (error) {
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "Permiso de cámara denegado",
+                text: "Por favor, concede el permiso de la cámara para escanear el código QR.",
+                showConfirmButton: true,
+            });
+        }
+    };
 
     const encenderCamara = () => {
         const qrScanner = new QrScanner(
             videoRef.current,
             result => {
                 Swal.fire('QR Code', `Contenido: ${result}`, 'success');
-
                 const match = result.match(/^(\D+)\s(\d+)\s(.+)$/);
-
                 if (match) {
-                    const primeraParte = match[1].trim(); // "Mesa"
-                    const numero = match[2]; // "1"
-                    const segundaParte = match[3]; // "CucchoGrill"
+                    const primeraParte = match[1].trim();
+                    const numero = match[2];
+                    const segundaParte = match[3];
                     Swal.fire({
                         position: "center",
                         icon: "success",
-                        title: "Escanero con exito",
+                        title: "Escaneado con éxito",
                         showConfirmButton: false,
                         timer: 1500,
                         customClass: {
@@ -60,10 +96,8 @@ const QRCodeScanner = () => {
                             title: 'swal2-title',
                         }
                     });
-                    setScanner(null)
-                    handleUpdate("pedido")
-
-
+                    setScanner(null);
+                    handleUpdate("pedido");
                 } else {
                     Swal.fire({
                         position: "center",
@@ -77,9 +111,6 @@ const QRCodeScanner = () => {
                         }
                     });
                 }
-
-
-
             },
             error => {
                 console.error(error);
@@ -96,13 +127,17 @@ const QRCodeScanner = () => {
     };
 
     return (
-        <div style={{width:"100%" ,height:"100%",background:"#1F1120"}}>
-            <h5 style={{color:"white"}} className="text-center text-white">Escanear código QR</h5>
-            <Card style={{ marginLeft: "20px", marginRight: "20px" }}>
-                <CardBody>
-                    <video style={{ borderRadius: "12px" }} ref={videoRef}></video>
-                </CardBody>
-            </Card>
+        <div style={{ width: "100%", height: "100%", background: "#1F1120" }}>
+            <div style={{ display: "flex", justifyContent: "center", width: "100vw", marginBottom: "10px" }}>
+                <img style={{ width: "50%" }} src="https://i.ibb.co/ZHj7P7s/parte-arriba.png" alt="" />
+            </div>
+            <h1 style={{ color: "#DDBD8C", fontSize: "1.5em" }} className="text-center text-white">Escanea el código QR</h1>
+            <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+                <video style={{ borderRadius: "12px", height: "40%", width: "70%" }} ref={videoRef}></video>
+            </div>
+            <div style={{ display: "flex", justifyContent: "center", width: "100vw", marginTop: "10px" }}>
+                <img style={{ width: "50%" }} src="https://i.ibb.co/9cSHCf1/parte-abajo.png" alt="" />
+            </div>
         </div>
     );
 };
