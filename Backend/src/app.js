@@ -12,7 +12,7 @@ const app = express();
 //Conexion DB nubr
 /* const uri = process.env.MONGODB_URI; */
 
-const uri = "mongodb://cucchogrill:dYBgAsmrznfRw1Bz@cluster0.b99um9w.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+const uri = "mongodb+srv://cucchogrill:dYBgAsmrznfRw1Bz@cluster0.b99um9w.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 const options = {useNewUrlParser: true};
 // Or using promises
