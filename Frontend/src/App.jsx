@@ -13,6 +13,10 @@ import DescuentosCard from './components/DescuentosCard';
 
 import VistaPedido from "./components/VistaPedido"
 
+
+import VistaProducto from "./components/VistaProducto"
+
+
 function App() {
   const value = useSelector((state) => state.example.value);
   return (
@@ -37,7 +41,8 @@ function App() {
         }
         {value === "menu" &&
           <div >
-            <CardProductos />
+            {/* <CardProductos /> */}
+            <VistaProducto/>
           </div>
         }
         {value === "descuento" &&

@@ -20,56 +20,70 @@ export default function App() {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", width: "100%", height: "100%" }}>
-      <p className="text-primario text-4xl font-semibold sm:text-5xl" style={{ textAlign: "center", marginTop: "10px", marginBottom: "20px" }}>
+
+      <p className="text-primario text-4xl font-semibold sm:text-5xl" style={{ textAlign: "center", marginTop: "10%", marginBottom: "20px" }}>
         Administrar Recursos
       </p>
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }} >
 
-        <Button isIconOnly style={{ width: "200px", height: "100px", margin: "2%" }} variant="flat">
-          <img src="https://i.ibb.co/tBPC2fw/3e99fa77-2f5a-4ed9-bc65-2f3759ebaae5.jpg" alt="" />
+      <Button variant="flat" className="bg-primario " style={{ marginLeft: "5%", marginRight: "5%", marginBottom: "5%", height: "50px", color: "white", fontSize: "1.3em" }}>
+        <div style={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
+          <span className="material-icons-outlined">
+            lunch_dining
+          </span>
+          <p style={{ textAlign: "center" }}>Productos</p>
 
-          <div style={{ position: "absolute", bottom: "0", background: "rgba(31,17,32,0.4)", width: "100%", height: "30%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <p style={{ fontSize: "1.2em", color: "white", fontWeight: "100" }} > Productos </p>
-          </div>
+          <span className="material-icons-outlined">
+            lunch_dining
+          </span>
+        </div>
+      </Button>
+      
+      <Button variant="flat" className="bg-primario " style={{ marginLeft: "5%", marginRight: "5%", marginBottom: "5%", height: "50px", color: "white", fontSize: "1.3em" }}>
+        <div style={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
+          <span className="material-icons-outlined">
+            fastfood
+          </span>
+          <p style={{ textAlign: "center" }}>Promociones</p>
+          <span className="material-icons-outlined">
+            fastfood
+          </span>
+        </div>
+      </Button>
+      <Button variant="flat" className="bg-primario " style={{ marginLeft: "5%", marginRight: "5%", marginBottom: "5%", height: "50px", color: "white", fontSize: "1.3em" }}>
+        <div style={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
+          <span className="material-icons-outlined">
+            restaurant
+          </span>
+          <p style={{ textAlign: "center" }}>Pedidos en curso</p>
+          <span className="material-icons-outlined">
+            restaurant
+          </span>
+        </div>
+      </Button>
+      <Button variant="flat" className="bg-primario " style={{ marginLeft: "5%", marginRight: "5%", marginBottom: "5%", height: "50px", color: "white", fontSize: "1.3em" }}>
+        <div style={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
+          <span className="material-icons-outlined">
+            manage_search
+          </span>
+          <p style={{ textAlign: "center" }}>Historial de pedidos</p>
+          <span className="material-icons-outlined">
+            manage_search
+          </span>
+        </div>
+      </Button>
+      <Button variant="flat" className="bg-primario " style={{ marginLeft: "5%", marginRight: "5%", marginBottom: "5%", height: "50px", color: "white", fontSize: "1.3em" }}>
+        <div style={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
+          <span className="material-icons-outlined">
+            manage_accounts
+          </span>
+          <p style={{ textAlign: "center" }}>Administrar usuarios</p>
+          <span className="material-icons-outlined">
+            manage_accounts
+          </span>
+        </div>
+      </Button>
 
-        </Button>
-        <Button isIconOnly style={{ width: "100%", height: "100px", margin: "2%" }} variant="flat">
-          <img src="https://i.ibb.co/sPCdYyF/hambuergueza.jpg" alt="" />
-          <div style={{ position: "absolute", bottom: "0", background: "rgba(31,17,32,0.4)", width: "100%", height: "30%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <p style={{ fontSize: "1.2em", color: "white", fontWeight: "100" }} > Promociones </p>
-          </div>
-        </Button>
 
-      </div>
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }} >
-      <Button isIconOnly style={{ width: "100%", height: "100px", margin: "2%" }} variant="flat">
-          <img src="https://i.ibb.co/DKWxLXr/Firefly-pedidos-en-curso-de-comida-mostrando-comida-14133.jpg" alt="" />
-          <div style={{ position: "absolute", bottom: "0", background: "rgba(31,17,32,0.4)", width: "100%", height: "30%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <p style={{ fontSize: "1.2em", color: "white", fontWeight: "100" }} > Pedidos en curso  </p>
-          </div>
-        </Button>
-        <Button isIconOnly style={{ width: "200px", height: "100px", margin: "2%" }} variant="flat">
-          <img style={{ maxHeight: "100%", maxWidth: "none" }} src="https://i.ibb.co/kDCrkX5/usuario-de-computadoras.jpg" alt="" />
-
-          <div style={{ position: "absolute", bottom: "0", background: "rgba(31,17,32,0.4)", width: "100%", height: "30%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <p style={{ fontSize: "1.2em", color: "white", fontWeight: "100" }} > Usuarios </p>
-          </div>
-
-        </Button>
-
-
-      </div>
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }} >
-
-        <Button isIconOnly style={{ width: "100%", height: "100px", margin: "2%" }} variant="flat">
-          <img style={{maxHeight:"100%",maxWidth:"none"}} src="https://cdn-icons-png.flaticon.com/512/11181/11181309.png" alt="" />
-          <div style={{ position: "absolute", bottom: "0", background: "rgba(31,17,32,0.4)", width: "100%", height: "30%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <p style={{ fontSize: "1.2em", color: "white", fontWeight: "100" }} > Historial de Pedidos </p>
-          </div>
-        </Button>
-     
-
-      </div>
       <div style={{ display: "flex", justifyContent: "center", marginTop: "20px", color: "white", marginRight: "2%" }}>
         <Button onClick={() => { handleUpdateLogin("nologin"), handleUpdate("home") }} className="bg-fondo text-white">
           <span style={{ color: "white" }} className="material-icons-outlined">
@@ -79,11 +93,6 @@ export default function App() {
 
         </Button>
       </div>
-
-
-
-
-
 
     </div>
   );
