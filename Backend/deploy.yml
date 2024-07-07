@@ -1,0 +1,39 @@
+name: Deploy to Google Cloud Run
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        version: 'latest'
+        project_id: carpool-383320
+        service_account_key: ${{ secrets.GOOGLE_CLOUD_KEYFILE_JSON }}
+
+    - name: Build Docker image
+      run: |
+        docker build -t gcr.io/carpool-383320/my-app:$GITHUB_SHA .
+
+    - name: Push Docker image to Google Container Registry
+      run: |
+        echo ${{ secrets.GOOGLE_CLOUD_KEYFILE_JSON }} | docker login -u _json_key --password-stdin https://gcr.io
+        docker push gcr.io/carpool-383320/my-app:$GITHUB_SHA
+
+    - name: Deploy to Google Cloud Run
+      run: |
+        gcloud run deploy my-service \
+          --image gcr.io/carpool-383320/my-app:$GITHUB_SHA \
+          --platform managed \
+          --region us-central1 \
+          --set-env-vars MONGODB_URI="mongodb+srv://cucchogrill:dYBgAsmrznfRw1Bz@cluster0.b99um9w.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0" \
+          --allow-unauthenticated
