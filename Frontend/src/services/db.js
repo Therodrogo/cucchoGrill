@@ -32,4 +32,32 @@ export default class db {
         }
     }
 
+    static async obtenerProductoId(id) {
+        try {
+            const res = await axios.get(url + "obtenerproductoid/"+ id)
+            return res.data
+        } catch (error) {
+            return error.response.data
+        }
+    }
+
+    static async actualizarVisibilidad(id) {
+        try {
+            const res = await axios.put(url + "actualizarVisibilidad/"+ id)
+            return res.data
+        } catch (error) {
+            return error.response.data
+        }
+    }
+
+    static async editarProducto(data) {
+        try {
+            const res = await axios.put(url + "actualizarProducto",data)
+            return res.data
+        } catch (error) {
+            return error.response.data
+        }
+    }
+
+    
 }
