@@ -14,4 +14,22 @@ export default class db {
         }
     }
 
+    static async crearProducto(data) {
+        try {
+            const res = await axios.post(url + "nuevoproducto", data)
+            return res.data
+        } catch (error) {
+            return error.response.data
+        }
+    }
+
+    static async obtenerProductos(data) {
+        try {
+            const res = await axios.get(url + "obtenerproductos", data)
+            return res.data
+        } catch (error) {
+            return error.response.data
+        }
+    }
+
 }

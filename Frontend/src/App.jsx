@@ -24,7 +24,7 @@ function App() {
 
       <NavbarSuperior />
 
-      <div className='contenidoCentral' style={{ display: "flex", flexDirection: "column", overflow: "auto", height: "81vh", marginTop: "70px" }} >
+      <div className='contenidoCentral' style={{ display: "flex", flexDirection: "column", overflow: "auto", height: "82vh", marginTop: "70px" }} >
 
         {value === "home" &&
           <>
@@ -40,7 +40,7 @@ function App() {
           <QRscan2 />
         }
         {value === "menu" &&
-          <div >
+          <div>
             {/* <CardProductos /> */}
             <VistaProducto/>
           </div>
