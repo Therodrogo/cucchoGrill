@@ -192,14 +192,14 @@ export default function App() {
         if (!validateFields()) {
             return;
         }
-    
+
         setError("");
-    
+
         if (foto) {
             setLoading(true);
             const storageRef = ref(storage, `fotos/${nombre}`);
             const uploadTask = uploadBytesResumable(storageRef, foto);
-    
+
             uploadTask.on(
                 "state_changed",
                 (snapshot) => {
@@ -214,12 +214,12 @@ export default function App() {
                     getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
                         console.log("URL de la imagen subida:", downloadURL);
                         const producto = { _id: productoSeleccionado, nombre, precio, ingredientes, categoria, foto: downloadURL, visible };
-    
+
                         await db.editarProducto(producto);
-    
+
                         console.log("Producto actualizado:", producto);
                         setVisibleModalEditar(false);
-    
+
                         Swal.fire({
                             position: "center",
                             icon: "success",
@@ -233,9 +233,9 @@ export default function App() {
                                 title: 'swal2-title',
                             }
                         });
-    
+
                         setLoading(false);
-    
+
                         setMisProductos((prevProductos) =>
                             prevProductos.map((p) => (p._id === productoSeleccionado ? producto : p))
                         );
@@ -244,13 +244,13 @@ export default function App() {
             );
         } else {
             const producto = { _id: productoSeleccionado, nombre, precio, ingredientes, categoria, foto: "", visible };
-    
+
             await db.editarProducto(producto);
-    
+
             console.log("Producto actualizado:", producto);
-    
+
             setVisibleModalEditar(false);
-    
+
             Swal.fire({
                 position: "center",
                 icon: "success",
@@ -264,13 +264,22 @@ export default function App() {
                     title: 'swal2-title',
                 }
             });
-    
+
             setMisProductos((prevProductos) =>
                 prevProductos.map((p) => (p._id === productoSeleccionado ? producto : p))
             );
         }
     };
-    
+    const [verIngredientesModal, setVerIngredientesModal] = useState(false)
+
+    const [ingredientesSeleccionados, setIngredientesSeleccionados] = useState(null)
+
+    const verIngredientes = (ingredientes) => {
+       
+        setIngredientesSeleccionados(ingredientes)
+    }
+
+
     return (
         <>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", margin: "2%" }}>
@@ -421,7 +430,10 @@ export default function App() {
                                                     Cambiar Disponibilidad
                                                 </Button>
                                             </DropdownItem>
-                                            <DropdownItem key="ingredientes">
+
+
+
+                                            <DropdownItem onClick={()=>{verIngredientes(producto.ingredientes), setVerIngredientesModal(true)}} key="ingredientes">
                                                 Ver ingredientes
                                             </DropdownItem>
 
@@ -517,6 +529,27 @@ export default function App() {
                                     {loading ? "Cargando..." : "Crear"}
                                 </Button>
                             </ModalFooter>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
+
+
+            <Modal style={{ maxHeight: "80%", overflow: "scroll" }} placement={"center"} isOpen={verIngredientesModal} onOpenChange={() => { setVerIngredientesModal(false) }}>
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1">Ingredientes</ModalHeader>
+                            <ModalBody>
+                                {ingredientesSeleccionados.map((ingrediente, index) => (
+                                    <p key={index}>{ingrediente}</p>
+                                )) }
+                                
+                            </ModalBody>
+                            <ModalFooter>
+
+                            </ModalFooter>
+
                         </>
                     )}
                 </ModalContent>
