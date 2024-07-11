@@ -281,7 +281,7 @@ export default function App() {
 
     const eliminarProducto = async (id) => {
         try {
-            
+
             await db.eliminarProducto(id);
 
             // Actualiza el estado para eliminar el producto de la lista
@@ -318,9 +318,9 @@ export default function App() {
 
     return (
         <>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", margin: "2%" }}>
-                <Button isIconOnly style={{ position: "absolute" }}>
-                    <span style={{ color: "#454545" }} className="material-icons-outlined">
+            <div style={{ display: "flex",background:"#DDBD8C",  justifyContent: "space-between", alignItems: "center", padding: "2%" }}>
+                <Button variant="light" radius="none" isIconOnly style={{ position: "absolute" }}>
+                    <span style={{ color: "#1F1120" }} className="material-icons-outlined">
                         chevron_left
                     </span>
                 </Button>
@@ -335,9 +335,9 @@ export default function App() {
                 </div>
             </div>
 
-            <div style={{ display: "flex", justifyContent: "end", alignItems: "center", margin: "2%" }}>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", margin: "2%" }}>
                 <p>Crear producto</p>
-                <Button isIconOnly radius="full" className="bg-primario" style={{ color: "white", marginLeft: "2%" }} variant="flat" onClick={() => { setVisibleModal(true) }}>
+                <Button isIconOnly size="sm" radius="full" className="bg-primario" style={{ color: "white", marginLeft: "2%" }} variant="flat" onClick={() => { setVisibleModal(true) }}>
                     <span className="material-icons-outlined">
                         add
                     </span>
@@ -434,7 +434,6 @@ export default function App() {
                             <TableCell>{producto.nombre}</TableCell>
                             <TableCell>
                                 <User
-
                                     avatarProps={{
                                         src: producto.foto,
                                     }}
@@ -560,8 +559,7 @@ export default function App() {
                     )}
                 </ModalContent>
             </Modal>
-
-
+            
             <Modal style={{ maxHeight: "80%", overflow: "scroll" }} placement={"center"} isOpen={verIngredientesModal} onOpenChange={() => { setVerIngredientesModal(false) }}>
                 <ModalContent>
                     {(onClose) => (

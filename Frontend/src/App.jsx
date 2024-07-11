@@ -15,6 +15,7 @@ import VistaPedido from "./components/VistaPedido"
 
 
 import VistaProducto from "./components/VistaProducto"
+import VistaPromocion from "./components/VistaPromocion"
 
 
 function App() {
@@ -42,7 +43,7 @@ function App() {
         {value === "menu" &&
           <div>
             {/* <CardProductos /> */}
-            <VistaProducto/>
+            <VistaPromocion/>
           </div>
         }
         {value === "descuento" &&

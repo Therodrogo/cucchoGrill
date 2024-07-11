@@ -76,6 +76,68 @@ export default class db {
             }
         }
     }
+    static async crearPromocion(data) {
+        try {
+            const res = await axios.post(url + "nuevapromocion", data);
+            return res.data;
+        } catch (error) {
+            return error.response.data;
+        }
+    }
+
+    static async obtenerPromociones() {
+        try {
+            const res = await axios.get(url + "obtenerpromociones");
+            return res.data;
+        } catch (error) {
+            return error.response.data;
+        }
+    }
+
+    static async obtenerPromocionId(id) {
+        try {
+            const res = await axios.get(url + "obtenerpromocionid/" + id);
+            return res.data;
+        } catch (error) {
+            return error.response.data;
+        }
+    }
+
+    static async actualizarVisibilidadPromocion(id) {
+        try {
+            const res = await axios.put(url + "actualizarvisibilidad/" + id);
+            return res.data;
+        } catch (error) {
+            return error.response.data;
+        }
+    }
+
+    static async editarPromocion(data) {
+        try {
+            const res = await axios.put(url + "actualizarpromocion", data);
+            return res.data;
+        } catch (error) {
+            return error.response.data;
+        }
+    }
+
+    static async eliminarPromocion(id) {
+        try {
+            const res = await axios.delete(url + "eliminarpromocion/" + id);
+            return res.data;
+        } catch (error) {
+            if (error.response) {
+                // El servidor respondió con un estado fuera del rango 2xx
+                return error.response.data;
+            } else if (error.request) {
+                // La solicitud fue hecha pero no se recibió respuesta
+                return { error: "No response received from server." };
+            } else {
+                // Algo pasó al hacer la solicitud
+                return { error: error.message };
+            }
+        }
+    }
 
 
 
