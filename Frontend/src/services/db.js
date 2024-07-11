@@ -34,7 +34,7 @@ export default class db {
 
     static async obtenerProductoId(id) {
         try {
-            const res = await axios.get(url + "obtenerproductoid/"+ id)
+            const res = await axios.get(url + "obtenerproductoid/" + id)
             return res.data
         } catch (error) {
             return error.response.data
@@ -43,7 +43,7 @@ export default class db {
 
     static async actualizarVisibilidad(id) {
         try {
-            const res = await axios.put(url + "actualizarVisibilidad/"+ id)
+            const res = await axios.put(url + "actualizarVisibilidad/" + id)
             return res.data
         } catch (error) {
             return error.response.data
@@ -52,12 +52,31 @@ export default class db {
 
     static async editarProducto(data) {
         try {
-            const res = await axios.put(url + "actualizarProducto",data)
+            const res = await axios.put(url + "actualizarProducto", data)
             return res.data
         } catch (error) {
             return error.response.data
         }
     }
 
-    
+    static async eliminarProducto(id) {
+        try {
+            const res = await axios.delete(url + "eliminarproducto/" + id);
+            return res.data;
+        } catch (error) {
+            if (error.response) {
+                // El servidor respondió con un estado fuera del rango 2xx
+                return error.response.data;
+            } else if (error.request) {
+                // La solicitud fue hecha pero no se recibió respuesta
+                return { error: "No response received from server." };
+            } else {
+                // Algo pasó al hacer la solicitud
+                return { error: error.message };
+            }
+        }
+    }
+
+
+
 }

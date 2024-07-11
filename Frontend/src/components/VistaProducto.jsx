@@ -275,10 +275,46 @@ export default function App() {
     const [ingredientesSeleccionados, setIngredientesSeleccionados] = useState(null)
 
     const verIngredientes = (ingredientes) => {
-       
+
         setIngredientesSeleccionados(ingredientes)
     }
 
+    const eliminarProducto = async (id) => {
+        try {
+            
+            await db.eliminarProducto(id);
+
+            // Actualiza el estado para eliminar el producto de la lista
+            setMisProductos((prevProductos) => prevProductos.filter(producto => producto._id !== id));
+
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Producto eliminado",
+                text: "El producto ha sido eliminado con éxito.",
+                showConfirmButton: false,
+                timer: 1500,
+                customClass: {
+                    popup: 'swal2-popup',
+                    title: 'swal2-title',
+                }
+            });
+        } catch (error) {
+            console.error("Error al eliminar el producto:", error);
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "Error",
+                text: "Hubo un error al eliminar el producto.",
+                showConfirmButton: false,
+                timer: 1500,
+                customClass: {
+                    popup: 'swal2-popup',
+                    title: 'swal2-title',
+                }
+            });
+        }
+    };
 
     return (
         <>
@@ -424,31 +460,22 @@ export default function App() {
                                             </Button>
                                         </DropdownTrigger>
                                         <DropdownMenu aria-label="Dynamic Actions">
+                                            
                                             <DropdownItem key="disponibilidad">
-
                                                 <Button variant="flat" onClick={() => { cambiarVisibilidad(producto._id) }}>
                                                     Cambiar Disponibilidad
                                                 </Button>
                                             </DropdownItem>
 
-
-
-                                            <DropdownItem onClick={()=>{verIngredientes(producto.ingredientes), setVerIngredientesModal(true)}} key="ingredientes">
+                                            <DropdownItem onClick={() => { verIngredientes(producto.ingredientes), setVerIngredientesModal(true) }} key="ingredientes">
                                                 Ver ingredientes
                                             </DropdownItem>
-
-
-
 
                                             <DropdownItem onClick={() => { obtenerProductoId(producto._id), setVisibleModalEditar(true) }} key="editar">
                                                 Editar
                                             </DropdownItem>
 
-
-
-
-
-                                            <DropdownItem style={{ color: "red" }} key="eliminar">
+                                            <DropdownItem onClick={() => { eliminarProducto(producto._id) }} style={{ color: "red" }} key="eliminar">
                                                 Eliminar
                                             </DropdownItem>
                                         </DropdownMenu>
@@ -543,8 +570,8 @@ export default function App() {
                             <ModalBody>
                                 {ingredientesSeleccionados.map((ingrediente, index) => (
                                     <p key={index}>{ingrediente}</p>
-                                )) }
-                                
+                                ))}
+
                             </ModalBody>
                             <ModalFooter>
 
