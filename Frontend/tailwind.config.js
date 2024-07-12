@@ -13,7 +13,8 @@ export default {
     colors: {
       fondo: '#DDBD8C',
       primario:"#1F1120",
-      primary:"#1F1120"
+      primary:"#1F1120",
+      otro:"#DD79E5"
     },
     extend: {},
   },

@@ -43,7 +43,7 @@ function App() {
         {value === "menu" &&
           <div>
             {/* <CardProductos /> */}
-            <VistaPromocion/>
+            <VistaPedido/>
           </div>
         }
         {value === "descuento" &&
