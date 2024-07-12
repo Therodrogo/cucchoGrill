@@ -16,13 +16,12 @@ import VistaPedido from "./components/VistaPedido"
 
 import VistaProducto from "./components/VistaProducto"
 import VistaPromocion from "./components/VistaPromocion"
-import AdminProduct from './components/AdminProduct';
 import PayConfirm from './components/PayConfirm';
-
 
 function App() {
   const value = useSelector((state) => state.example.value);
   return (
+
     <div className="App" style={{ display: "flex", flexDirection: "column" }}>
 
       <NavbarSuperior />
@@ -45,7 +44,7 @@ function App() {
         {value === "menu" &&
           <div>
             {/* <CardProductos /> */}
-            <PayConfirm/>
+            <VistaPromocion/>
           </div>
         }
         {value === "descuento" &&
@@ -59,12 +58,7 @@ function App() {
           <AdminCard/>
           </>
         }
-         {value === "pedido" &&
-          <>
-          <VistaPedido/>
-          </>
-        }
-
+   
       </div>
 
       <NavbarInferior />
