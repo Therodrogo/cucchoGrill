@@ -1,13 +1,20 @@
+# Usa una imagen base de Node.js
 FROM node
 
-WORKDIR /app
+# Establece el directorio de trabajo de la aplicación dentro del contenedor
+WORKDIR /usr/src/app
 
+# Copia los archivos package.json y package-lock.json
 COPY package*.json ./
 
+# Instala las dependencias de la aplicación
 RUN npm install
 
-COPY . /app
+# Copia el resto de los archivos de la aplicación
+COPY . .
 
+# Exponer el puerto en el que correrá la aplicación
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+# Comando para correr la aplicación
+CMD ["npm", "start"]

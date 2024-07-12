@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Pedido = require('../models/Pedido');
+const Pedido = require('../models/pedido');
 
 // POST: Crear un nuevo pedido
 router.post('/nuevopedido', async (req, res) => {

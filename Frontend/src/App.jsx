@@ -11,6 +11,13 @@ import Carrousel from './components/Carrousel';
 import Novedades from './components/Novedades';
 import DescuentosCard from './components/DescuentosCard';
 
+import VistaPedido from "./components/VistaPedido"
+
+
+import VistaProducto from "./components/VistaProducto"
+import VistaPromocion from "./components/VistaPromocion"
+
+
 function App() {
   const value = useSelector((state) => state.example.value);
   return (
@@ -18,7 +25,7 @@ function App() {
 
       <NavbarSuperior />
 
-      <div className='contenidoCentral' style={{ display: "flex", flexDirection: "column", overflow: "auto", height: "81vh", marginTop: "70px" }} >
+      <div className='contenidoCentral' style={{ display: "flex", flexDirection: "column", overflow: "auto", height: "82vh", marginTop: "70px" }} >
 
         {value === "home" &&
           <>
@@ -34,14 +41,25 @@ function App() {
           <QRscan2 />
         }
         {value === "menu" &&
-          <div >
-            <CardProductos />
+          <div>
+            {/* <CardProductos /> */}
+            <VistaPedido/>
           </div>
         }
         {value === "descuento" &&
           <>
           <SliderH />
           <DescuentosCard />
+          </>
+        }
+        {value === "login" &&
+          <>
+          <AdminCard/>
+          </>
+        }
+         {value === "pedido" &&
+          <>
+          <VistaPedido/>
           </>
         }
 

@@ -1,77 +1,99 @@
 import React from "react";
-import { Listbox, ListboxItem } from "@nextui-org/react";
-import { ListboxWrapper } from "./ListboxWrapper";
-import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button, Avatar, User } from "@nextui-org/react";
 
-const AdminCard = () => {
-  const handleAction = (action, item) => {
-    alert(`Acción: ${action} en ${item}`);
+import { updateLogin } from "../app/slides/example2";
+import { useDispatch } from "react-redux";
+import { updateString } from "../app/slides/example";
+
+
+export default function App() {
+
+  const dispatch = useDispatch();
+
+  const handleUpdateLogin = (valor) => {
+    dispatch(updateLogin(valor));
+  };
+
+  const handleUpdate = (valor) => {
+    dispatch(updateString(valor));
   };
 
   return (
-    <div className="flex flex-col gap-2 p-4">
-      <div className="flex justify-between px-4 py-2 bg-gray-100 rounded-t">
-        <span>Administrar</span>
-        <span>Acciones</span>
+    <div style={{ display: "flex", flexDirection: "column", width: "100%", height: "100%" }}>
+
+      <p className="text-primario text-4xl font-semibold sm:text-5xl" style={{ textAlign: "center", marginTop: "10%", marginBottom: "20px" }}>
+        Administrar Recursos
+      </p>
+
+      <Button variant="flat" className="bg-primario " style={{ marginLeft: "5%", marginRight: "5%", marginBottom: "5%", height: "50px", color: "white", fontSize: "1.3em" }}>
+        <div style={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
+          <span className="material-icons-outlined">
+            lunch_dining
+          </span>
+          <p style={{ textAlign: "center" }}>Productos</p>
+
+          <span className="material-icons-outlined">
+            lunch_dining
+          </span>
+        </div>
+      </Button>
+      
+      <Button variant="flat" className="bg-primario " style={{ marginLeft: "5%", marginRight: "5%", marginBottom: "5%", height: "50px", color: "white", fontSize: "1.3em" }}>
+        <div style={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
+          <span className="material-icons-outlined">
+            fastfood
+          </span>
+          <p style={{ textAlign: "center" }}>Promociones</p>
+          <span className="material-icons-outlined">
+            fastfood
+          </span>
+        </div>
+      </Button>
+      <Button variant="flat" className="bg-primario " style={{ marginLeft: "5%", marginRight: "5%", marginBottom: "5%", height: "50px", color: "white", fontSize: "1.3em" }}>
+        <div style={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
+          <span className="material-icons-outlined">
+            restaurant
+          </span>
+          <p style={{ textAlign: "center" }}>Pedidos en curso</p>
+          <span className="material-icons-outlined">
+            restaurant
+          </span>
+        </div>
+      </Button>
+      <Button variant="flat" className="bg-primario " style={{ marginLeft: "5%", marginRight: "5%", marginBottom: "5%", height: "50px", color: "white", fontSize: "1.3em" }}>
+        <div style={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
+          <span className="material-icons-outlined">
+            manage_search
+          </span>
+          <p style={{ textAlign: "center" }}>Historial de pedidos</p>
+          <span className="material-icons-outlined">
+            manage_search
+          </span>
+        </div>
+      </Button>
+      <Button variant="flat" className="bg-primario " style={{ marginLeft: "5%", marginRight: "5%", marginBottom: "5%", height: "50px", color: "white", fontSize: "1.3em" }}>
+        <div style={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
+          <span className="material-icons-outlined">
+            manage_accounts
+          </span>
+          <p style={{ textAlign: "center" }}>Administrar usuarios</p>
+          <span className="material-icons-outlined">
+            manage_accounts
+          </span>
+        </div>
+      </Button>
+
+
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "20px", color: "white", marginRight: "2%" }}>
+        <Button onClick={() => { handleUpdateLogin("nologin"), handleUpdate("home") }} className="bg-fondo text-white">
+          <span style={{ color: "white" }} className="material-icons-outlined">
+            logout
+          </span>
+          Cerrar Sesión
+
+        </Button>
       </div>
-      <ListboxWrapper>
-        <Listbox aria-label="Actions">
-          <ListboxItem key="pedidos">
-            <div className="flex items-center justify-between p-2 border-b">
-              <div className="flex items-center">
-                <img src="https://example.com/pedidos.jpg" alt="Pedidos" className="w-8 h-8 rounded-full mr-2" />
-                Pedidos
-              </div>
-              <div className="flex items-center space-x-2">
-                <FaEye className="text-gray-500 cursor-pointer" onClick={() => handleAction('view', 'Pedidos')} />
-                <FaEdit className="text-pink-500 cursor-pointer" onClick={() => handleAction('edit', 'Pedidos')} />
-                <FaTrash className="text-pink-500 cursor-pointer" onClick={() => handleAction('delete', 'Pedidos')} />
-              </div>
-            </div>
-          </ListboxItem>
-          <ListboxItem key="promociones">
-            <div className="flex items-center justify-between p-2 border-b">
-              <div className="flex items-center">
-                <img src="https://example.com/promociones.jpg" alt="Promociones" className="w-8 h-8 rounded-full mr-2" />
-                Promociones
-              </div>
-              <div className="flex items-center space-x-2">
-                <FaEye className="text-gray-500 cursor-pointer" onClick={() => handleAction('view', 'Promociones')} />
-                <FaEdit className="text-pink-500 cursor-pointer" onClick={() => handleAction('edit', 'Promociones')} />
-                <FaTrash className="text-pink-500 cursor-pointer" onClick={() => handleAction('delete', 'Promociones')} />
-              </div>
-            </div>
-          </ListboxItem>
-          <ListboxItem key="productos">
-            <div className="flex items-center justify-between p-2 border-b">
-              <div className="flex items-center">
-                <img src="https://example.com/productos.jpg" alt="Productos" className="w-8 h-8 rounded-full mr-2" />
-                Productos
-              </div>
-              <div className="flex items-center space-x-2">
-                <FaEye className="text-gray-500 cursor-pointer" onClick={() => handleAction('view', 'Productos')} />
-                <FaEdit className="text-pink-500 cursor-pointer" onClick={() => handleAction('edit', 'Productos')} />
-                <FaTrash className="text-pink-500 cursor-pointer" onClick={() => handleAction('delete', 'Productos')} />
-              </div>
-            </div>
-          </ListboxItem>
-          <ListboxItem key="usuarios">
-            <div className="flex items-center justify-between p-2">
-              <div className="flex items-center">
-                <img src="https://example.com/usuarios.jpg" alt="Usuarios" className="w-8 h-8 rounded-full mr-2" />
-                Usuarios
-              </div>
-              <div className="flex items-center space-x-2">
-                <FaEye className="text-gray-500 cursor-pointer" onClick={() => handleAction('view', 'Usuarios')} />
-                <FaEdit className="text-pink-500 cursor-pointer" onClick={() => handleAction('edit', 'Usuarios')} />
-                <FaTrash className="text-pink-500 cursor-pointer" onClick={() => handleAction('delete', 'Usuarios')} />
-              </div>
-            </div>
-          </ListboxItem>
-        </Listbox>
-      </ListboxWrapper>
+
     </div>
   );
-};
-
-export default AdminCard;
+}
