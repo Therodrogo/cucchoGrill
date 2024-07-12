@@ -20,6 +20,8 @@ import VistaPromocion from "./components/VistaPromocion"
 
 import PromocionIndividual from "./components/PromoIndividual"
 
+import ResumenPedido from "./components/ResumenPedido"
+
 
 function App() {
   const value = useSelector((state) => state.example.value);
@@ -45,8 +47,8 @@ function App() {
         }
         {value === "menu" &&
           <div>
-            {/* <CardProductos /> */}
-            <VistaPedido/>
+            <CardProductos />
+            
           </div>
         }
         {value === "descuento" &&

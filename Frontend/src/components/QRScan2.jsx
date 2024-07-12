@@ -4,6 +4,7 @@ import QrScanner from 'qr-scanner';
 import { Button, Card, CardBody } from '@nextui-org/react';
 import { updateString } from '../app/slides/example';
 import { useDispatch } from 'react-redux';
+import { updateCliente } from '../app/slides/cliente';
 
 const QRCodeScanner = () => {
     const videoRef = useRef(null);
@@ -12,6 +13,10 @@ const QRCodeScanner = () => {
 
     const handleUpdate = (valor) => {
         dispatch(updateString(valor));
+    };
+
+    const handleUpdateCliente = (valor) => {
+        dispatch(updateCliente(valor));
     };
 
     useEffect(() => {
@@ -85,6 +90,9 @@ const QRCodeScanner = () => {
                     const primeraParte = match[1].trim();
                     const numero = match[2];
                     const segundaParte = match[3];
+
+                    handleUpdateCliente(numero)
+                    console.log(numero)
                     Swal.fire({
                         position: "center",
                         icon: "success",

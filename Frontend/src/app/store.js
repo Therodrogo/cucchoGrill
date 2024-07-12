@@ -3,12 +3,14 @@ import exampleReducer from './slides/example.js';
 import exampleReducer2 from './slides/example2.js';
 import exampleReducer3 from './slides/example3.js';
 import pedidoCursoReducer from './slides/PedidoCurso.js';
+import clienteReducer from './slides/cliente.js';
 
 export const store = configureStore({
   reducer: {
     example: exampleReducer,
     example2: exampleReducer2,
     example3: exampleReducer3,
-    pedidoCurso: pedidoCursoReducer
+    pedidoCurso: pedidoCursoReducer,
+    cliente:clienteReducer
   },
 });

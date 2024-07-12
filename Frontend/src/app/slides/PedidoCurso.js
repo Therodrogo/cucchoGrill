@@ -9,7 +9,7 @@ const pedidoCurso = createSlice({
   initialState,
   reducers: {
     updatePedidoCurso: (state, action) => {
-      state.value =  state.value + action.payload;
+      state.value = action.payload;
     },
   },
 });

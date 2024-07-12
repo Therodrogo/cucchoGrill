@@ -16,6 +16,7 @@ function App() {
 
     const handleUpdatePedido = (valor) => {
         dispatch(updatePedidoCurso(valor));
+        console.log(valor)
     };
 
     const [misPromociones, setMisPromociones] = useState([]);
@@ -28,7 +29,6 @@ function App() {
             const promociones = await db.obtenerPromociones();
             setMisPromociones(promociones);
         };
-
         obtenerPromociones();
     }, []);
 
@@ -96,7 +96,7 @@ function App() {
                                         ))}
                                     </ModalBody>
                                     <ModalFooter>
-                                        <Button onClick={()=>{handleUpdatePedido(1)}}  style={{ color: "white" }} className="bg-primario"> Siguiente</Button>
+                                        <Button onClick={() => { handleUpdatePedido(1) }} style={{ color: "white" }} className="bg-primario"> Siguiente</Button>
                                     </ModalFooter>
                                 </>
                             )}
@@ -163,7 +163,7 @@ function App() {
             )}
 
 
-            {value ==1  &&(
+            {(value === 1 || value === 2 || value === 3) && (
                 <>
                     <PromoIndividual pedidoElegido={pedido} />
                 </>
