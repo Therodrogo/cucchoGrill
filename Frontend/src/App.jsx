@@ -18,6 +18,9 @@ import VistaProducto from "./components/VistaProducto"
 import VistaPromocion from "./components/VistaPromocion"
 
 
+import PromocionIndividual from "./components/PromoIndividual"
+
+
 function App() {
   const value = useSelector((state) => state.example.value);
   return (

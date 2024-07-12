@@ -1,7 +1,9 @@
 import axios from 'axios'
-/* const url = "http://localhost:3000/api/" */
+const url = "http://localhost:3000/api/"
 
-const url ="https://nobasededatos-wacd334doa-uc.a.run.app/api/"
+/* const url ="https://nobasededatos-wacd334doa-uc.a.run.app/api/" */
+
+/* const url ="http://34.134.15.112:3000/api/" */
 
 export default class db {
 
