@@ -1,7 +1,7 @@
 import axios from 'axios'
-/* const url = "http://localhost:3000/api/" */
+const url = "http://localhost:3000/api/"
 
-const url ="https://nobasededatos-wacd334doa-uc.a.run.app/api/"
+/* const url ="https://nobasededatos-wacd334doa-uc.a.run.app/api/"*/
 
 export default class db {
 
@@ -26,6 +26,14 @@ export default class db {
     static async obtenerProductos(data) {
         try {
             const res = await axios.get(url + "obtenerproductos", data)
+            return res.data
+        } catch (error) {
+            return error.response.data
+        }
+    }
+    static async obtenerPedidos(data) {
+        try {
+            const res = await axios.get(url + "obtenerpedidos", data)
             return res.data
         } catch (error) {
             return error.response.data
