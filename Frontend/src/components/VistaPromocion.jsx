@@ -7,8 +7,16 @@ import { storage } from "../services/firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import Swal from 'sweetalert2';
 import db from '../services/db';
+import { useDispatch, useSelector } from "react-redux";
+
+import { setView } from "../app/slides/pedidoView";
 
 export default function Promociones() {
+    const dispatch = useDispatch();
+
+    const handleViewChange = (view) => {
+        dispatch(setView(view));
+    };
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [nombre, setNombre] = useState("");
     const [productosSeleccionados, setProductosSeleccionados] = useState([]);
@@ -360,8 +368,8 @@ export default function Promociones() {
 
     return (
         <div>
-            <div style={{ display: "flex",background:"#DDBD8C",  justifyContent: "space-between", alignItems: "center", padding: "2%" }}>
-                <Button isIconOnly variant="light" radius="none" style={{ position: "absolute" }}>
+            <div style={{ display: "flex", background: "#DDBD8C", justifyContent: "space-between", alignItems: "center", padding: "2%" }}>
+                <Button onClick={()=>{handleViewChange("home")}} isIconOnly variant="light" radius="none" style={{ position: "absolute" }}>
                     <span style={{ color: "#1F1120" }} className="material-icons-outlined">
                         chevron_left
                     </span>
@@ -499,7 +507,7 @@ export default function Promociones() {
                                         {promocion.visible ? "visibility" : "visibility_off"}
                                     </span>
                                 </div>
-                                
+
                             </TableCell>
                             <TableCell>
                                 <div style={{ width: "100%", display: "flex", justifyContent: "center", marginTop: "5px" }}>

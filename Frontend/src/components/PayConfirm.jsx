@@ -1,18 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Chip, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Input } from "@nextui-org/react";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User } from "@nextui-org/react";
+import { Modal, Button, ModalHeader, ModalBody, ModalFooter, ModalContent } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@nextui-org/react";
 import db from '../services/db';
+import { useDispatch, useSelector } from "react-redux";
+import { setView } from "../app/slides/pedidoView";
 
 const PayConfirm = () => {
+  const dispatch = useDispatch();
+
+  const handleViewChange = (view) => {
+    dispatch(setView(view));
+  };
+
   const [misPedidos, setMisPedidos] = useState([]);
   const [selectedPedido, setSelectedPedido] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     const obtenerPedidos = async () => {
-      const productos = await db.obtenerPedidos();
-      setMisPedidos(productos);
+      try {
+        const pedidos = await db.obtenerPedidos(); // Asumiendo que obtienes los detalles completos de los pedidos incluyendo las promociones
+        setMisPedidos(pedidos);
+      } catch (error) {
+        console.error("Error al obtener los pedidos:", error);
+      }
     };
 
     obtenerPedidos();
@@ -28,82 +40,126 @@ const PayConfirm = () => {
     setSelectedPedido(null);
   };
 
+  const [promos, setPromos] = useState([])
+  const [precioTotalPromo, setPrecioTotalPromo] = useState(0);
+
+  const seleccionarPedido = async (promociones) => {
+    try {
+      const detallesPromos = await Promise.all(promociones.map(async (promocionT) => {
+        const minipromo = await db.obtenerPromocionId(promocionT.promocion);
+
+        const fullpromo = {
+          minipromo,
+          comentario: promocionT.comentario
+        };
+
+        return fullpromo;
+      }));
+
+      setPromos(detallesPromos);
+
+      // Calcular el precio total de las promociones
+      const total = detallesPromos.reduce((acc, promo) => acc + promo.minipromo.precioOferta, 0);
+      setPrecioTotalPromo(total);
+
+    } catch (error) {
+      console.error("Error al seleccionar el pedido:", error);
+    }
+  };
+
+
+
   return (
     <div>
-      <Table style={{ overflowX: "hidden" }} aria-label="Example static collection table">
+      <div style={{ display: "flex", background: "#DDBD8C", justifyContent: "space-between", alignItems: "center", padding: "2%" }}>
+        <Button onClick={() => handleViewChange("home")} isIconOnly variant="light" radius="none" style={{ position: "absolute" }}>
+          <span style={{ color: "#1F1120" }} className="material-icons-outlined">
+            chevron_left
+          </span>
+        </Button>
+        <div />
+        <p className="text-primario" style={{ textAlign: "center", fontSize: "1.5em" }}>
+          Pedidos
+        </p>
+        <div />
+      </div>
+      <Table style={{ overflowX: "hidden" }} aria-label="Tabla de Pedidos">
         <TableHeader>
-          <TableColumn>Cliente</TableColumn>
-          <TableColumn></TableColumn>
-          <TableColumn>Mesa</TableColumn>
-          <TableColumn>Precio</TableColumn>
-          <TableColumn>Pedido</TableColumn>
-          <TableColumn></TableColumn>
+          <TableColumn>Cliente/Mesa</TableColumn>
+          <TableColumn>Promociones</TableColumn>
+          <TableColumn>Estado</TableColumn>
+          <TableColumn>Acciones</TableColumn>
         </TableHeader>
         <TableBody>
           {misPedidos.map((pedido, index) => (
-            <TableRow key={index} onClick={() => handleRowClick(pedido)}>
-              <TableCell>{pedido.cliente}</TableCell>
+            <TableRow key={index}>
               <TableCell>
-                <User
-                  avatarProps={{
-                    src: pedido.foto,
-                  }}
-                />
+                <Button style={{fontSize:"2.4em",color:"white"}} variant="flat" className="bg-primario">
+                  {pedido.numMesa}
+                </Button>
+
+
               </TableCell>
-              <TableCell>{pedido.mesa}</TableCell>
-              <TableCell>${pedido.precio}</TableCell>
-              <TableCell>{pedido.pedido}</TableCell>
+              <TableCell>
+                <Button onClick={() => { seleccionarPedido(pedido.promociones), setIsModalVisible(true) }}> Ver promos</Button>
+              </TableCell>
+              <TableCell>
+                <p onClick={() => {}}>{pedido.estado}</p>
+              </TableCell>
               <TableCell style={{ width: "100%", display: "flex", justifyContent: "center" }}>
-                <div style={{ width: "100%", display: "flex", justifyContent: "center", marginTop: "5px" }}>
-                  <Dropdown>
-                    <DropdownTrigger>
-                      <Button className="bg-primario" style={{ color: "white" }} size="sm" isIconOnly variant="flat">
-                        <span className="material-icons-outlined">
-                          more_vert
-                        </span>
+                <Dropdown>
+                  <DropdownTrigger>
+                    <Button className="bg-primario" style={{ color: "white" }} size="sm" isIconOnly variant="flat">
+                      <span className="material-icons-outlined">
+                        more_vert
+                      </span>
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownMenu aria-label="Opciones">
+                    <DropdownItem key="disponibilidad">
+                      <Button variant="flat" onClick={() => { /* Lógica para cambiar disponibilidad */ }}>
+                        Cambiar Disponibilidad
                       </Button>
-                    </DropdownTrigger>
-                    <DropdownMenu aria-label="Dynamic Actions">
-                      <DropdownItem key="disponibilidad">
-                        <Button variant="flat" onClick={() => { cambiarVisibilidad(pedido.id) }}>
-                          Cambiar Disponibilidad
-                        </Button>
-                      </DropdownItem>
-                      <DropdownItem onClick={() => { verIngredientes(pedido.ingredientes), setVerIngredientesModal(true) }} key="ingredientes">
-                        Ver ingredientes
-                      </DropdownItem>
-                      <DropdownItem onClick={() => { obtenerPedidoId(pedido.id), setVisibleModalEditar(true) }} key="editar">
-                        Editar
-                      </DropdownItem>
-                      <DropdownItem onClick={() => { eliminarPedido(pedido.id) }} style={{ color: "red" }} key="eliminar">
-                        Eliminar
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </Dropdown>
-                </div>
+                    </DropdownItem>
+                    <DropdownItem onClick={() => { /* Lógica para ver ingredientes */ }} key="ingredientes">
+                      Ver ingredientes
+                    </DropdownItem>
+                    <DropdownItem onClick={() => { /* Lógica para editar */ }} key="editar">
+                      Editar
+                    </DropdownItem>
+                    <DropdownItem onClick={() => { /* Lógica para eliminar */ }} style={{ color: "red" }} key="eliminar">
+                      Eliminar
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+      <Modal placement="center" isOpen={isModalVisible} onOpenChange={() => setIsModalVisible(false)}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">Promociones del pedido</ModalHeader>
+              <ModalBody>
+                {promos.map((fullpromo, index) => (
+                  <div key={index}>
+                    <p style={{ fontSize: "1.3em" }}>{fullpromo.minipromo.nombre}</p>
+                    <p style={{ fontSize: "1em", color: "#454545" }}>Comentario: {fullpromo.comentario}</p>
 
-      {selectedPedido && (
-        <Modal open={isModalVisible} onClose={closeModal}>
-          <ModalHeader>
-            <h4>Información del Pedido</h4>
-          </ModalHeader>
-          <ModalBody>
-            <p><strong>Cliente:</strong> {selectedPedido.cliente}</p>
-            <p><strong>Mesa:</strong> {selectedPedido.mesa}</p>
-            <p><strong>Precio:</strong> ${selectedPedido.precio}</p>
-            <p><strong>Pedido:</strong> {selectedPedido.pedido}</p>
-            <User avatarProps={{ src: selectedPedido.foto }} />
-          </ModalBody>
-          <ModalFooter>
-            <Button onClick={closeModal}>Cerrar</Button>
-          </ModalFooter>
-        </Modal>
-      )}
+
+                  </div>
+                ))}
+                <p style={{ fontSize: "1.5em" }}>Precio Total: $ {precioTotalPromo} </p>
+              </ModalBody>
+              <ModalFooter>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+
     </div>
   );
 };

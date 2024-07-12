@@ -7,6 +7,8 @@ import { storage } from "../services/firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import Swal from 'sweetalert2';
 import db from '../services/db';
+import { useSelector, useDispatch } from 'react-redux';
+import { setView } from "../app/slides/pedidoView";
 
 export default function App() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -24,6 +26,12 @@ export default function App() {
     const [error, setError] = useState("");
 
     const [misProductos, setMisProductos] = useState([]);
+
+    const dispatch = useDispatch();
+
+    const handleViewChange = (view) => {
+        dispatch(setView(view));
+    };
 
     useEffect(() => {
         const obtenerProductos = async () => {
@@ -318,8 +326,8 @@ export default function App() {
 
     return (
         <>
-            <div style={{ display: "flex",background:"#DDBD8C",  justifyContent: "space-between", alignItems: "center", padding: "2%" }}>
-                <Button variant="light" radius="none" isIconOnly style={{ position: "absolute" }}>
+            <div style={{ display: "flex", background: "#DDBD8C", justifyContent: "space-between", alignItems: "center", padding: "2%" }}>
+                <Button onClick={()=>{handleViewChange("home")}} variant="light" radius="none" isIconOnly style={{ position: "absolute" }}>
                     <span style={{ color: "#1F1120" }} className="material-icons-outlined">
                         chevron_left
                     </span>
@@ -459,7 +467,7 @@ export default function App() {
                                             </Button>
                                         </DropdownTrigger>
                                         <DropdownMenu aria-label="Dynamic Actions">
-                                            
+
                                             <DropdownItem key="disponibilidad">
                                                 <Button variant="flat" onClick={() => { cambiarVisibilidad(producto._id) }}>
                                                     Cambiar Disponibilidad
@@ -559,7 +567,7 @@ export default function App() {
                     )}
                 </ModalContent>
             </Modal>
-            
+
             <Modal style={{ maxHeight: "80%", overflow: "scroll" }} placement={"center"} isOpen={verIngredientesModal} onOpenChange={() => { setVerIngredientesModal(false) }}>
                 <ModalContent>
                     {(onClose) => (

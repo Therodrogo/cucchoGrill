@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  currentView: 'pedidos', // Vista inicial
+  currentView: 'home', // Vista inicial
 };
 
 const viewSlice = createSlice({

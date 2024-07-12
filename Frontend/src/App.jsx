@@ -21,10 +21,13 @@ import VistaPromocion from "./components/VistaPromocion"
 import PromocionIndividual from "./components/PromoIndividual"
 
 import ResumenPedido from "./components/ResumenPedido"
+import PayConfirm from './components/PayConfirm';
 
 
 function App() {
   const value = useSelector((state) => state.example.value);
+
+  const valueViewAdmin = useSelector((state) => state.pedidoView.currentView)
   return (
     <div className="App" style={{ display: "flex", flexDirection: "column" }}>
 
@@ -34,8 +37,8 @@ function App() {
 
         {value === "home" &&
           <>
-          <Carrousel />
-          <Novedades />
+            <Carrousel />
+            <Novedades />
           </>
         }
 
@@ -48,23 +51,44 @@ function App() {
         {value === "menu" &&
           <div>
             <CardProductos />
-            
+
           </div>
         }
         {value === "descuento" &&
           <>
-          <SliderH />
-          <DescuentosCard />
+            <SliderH />
+            <DescuentosCard />
           </>
         }
         {value === "login" &&
           <>
-          <AdminCard/>
+            {valueViewAdmin == "home" && (
+              <>
+                <AdminCard />
+              </>
+            )}
+            {valueViewAdmin == "productos" && (
+              <>
+                <VistaProducto />
+              </>
+            )}
+            {valueViewAdmin == "promociones" && (
+              <>
+                <VistaPromocion/>
+              </>
+            )}
+             {valueViewAdmin == "pedidos" && (
+              <>
+                <PayConfirm/>
+              </>
+            )}
+
+
           </>
         }
-         {value === "pedido" &&
+        {value === "pedido" &&
           <>
-          <VistaPedido/>
+            <VistaPedido />
           </>
         }
 

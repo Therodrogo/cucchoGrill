@@ -53,6 +53,16 @@ export default class db {
         }
     }
 
+    static async obtenerPedidos(data) {
+        try {
+            const res = await axios.get(url + "obtenerpedidos" ,data)
+            return res.data
+        } catch (error) {
+            return error.response.data
+        }
+    }
+
+
     static async actualizarVisibilidad(id) {
         try {
             const res = await axios.put(url + "actualizarVisibilidad/" + id)

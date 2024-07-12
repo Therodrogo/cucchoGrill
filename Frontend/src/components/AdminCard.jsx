@@ -8,9 +8,10 @@ import PayConfirm from './PayConfirm';
 import VistaUsuarios from './VistaUsuarios'; // Importar el componente de usuarios
 import VistaPromociones from './VistaPromocion'; // Importar el componente de promociones
 
+
+
 export default function AdminCard() {
   const dispatch = useDispatch();
-  const currentView = useSelector((state) => state.view.currentView);
 
   const handleViewChange = (view) => {
     dispatch(setView(view));
@@ -22,9 +23,9 @@ export default function AdminCard() {
         Administrar Recursos
       </p>
 
-      <Button 
-        variant="flat" 
-        className="bg-primario" 
+      <Button
+        variant="flat"
+        className="bg-primario"
         style={{ marginLeft: "5%", marginRight: "5%", marginBottom: "5%", height: "50px", color: "white", fontSize: "1.3em" }}
         onClick={() => handleViewChange('productos')}
       >
@@ -35,9 +36,9 @@ export default function AdminCard() {
         </div>
       </Button>
 
-      <Button 
-        variant="flat" 
-        className="bg-primario" 
+      <Button
+        variant="flat"
+        className="bg-primario"
         style={{ marginLeft: "5%", marginRight: "5%", marginBottom: "5%", height: "50px", color: "white", fontSize: "1.3em" }}
         onClick={() => handleViewChange('promociones')}
       >
@@ -48,24 +49,11 @@ export default function AdminCard() {
         </div>
       </Button>
 
-      <Button 
-        variant="flat" 
-        className="bg-primario" 
+      <Button
+        variant="flat"
+        className="bg-primario"
         style={{ marginLeft: "5%", marginRight: "5%", marginBottom: "5%", height: "50px", color: "white", fontSize: "1.3em" }}
         onClick={() => handleViewChange('pedidos')}
-      >
-        <div style={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
-          <span className="material-icons-outlined">restaurant</span>
-          <p style={{ textAlign: "center" }}>Pedidos en curso</p>
-          <span className="material-icons-outlined">restaurant</span>
-        </div>
-      </Button>
-
-      <Button 
-        variant="flat" 
-        className="bg-primario" 
-        style={{ marginLeft: "5%", marginRight: "5%", marginBottom: "5%", height: "50px", color: "white", fontSize: "1.3em" }}
-        onClick={() => handleViewChange('historial')}
       >
         <div style={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
           <span className="material-icons-outlined">manage_search</span>
@@ -74,11 +62,11 @@ export default function AdminCard() {
         </div>
       </Button>
 
-      <Button 
-        variant="flat" 
-        className="bg-primario" 
+      <Button
+        variant="flat"
+        className="bg-primario"
         style={{ marginLeft: "5%", marginRight: "5%", marginBottom: "5%", height: "50px", color: "white", fontSize: "1.3em" }}
-        onClick={() => handleViewChange('usuarios')}
+        onClick={() => handleViewChange('home')}
       >
         <div style={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
           <span className="material-icons-outlined">manage_accounts</span>
@@ -94,11 +82,7 @@ export default function AdminCard() {
         </Button>
       </div>
 
-      {currentView === 'productos' && <AdminProduct />}
-      {currentView === 'promociones' && <VistaPromociones />}
-      {currentView === 'pedidos' && <PedidoView />}
-      {currentView === 'historial' && <PayConfirm />}
-      {currentView === 'usuarios' && <VistaUsuarios />}
+
     </div>
   );
 }
